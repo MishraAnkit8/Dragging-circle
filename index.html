@@ -1,0 +1,84 @@
+<!-- index.html File -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+
+	<title>Draggable Element</title>
+    <style>
+       
+
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: azure;
+}
+
+.container {
+	position: absolute;
+	left: 50%;
+	top: 50%; 
+	/* min-height: 2rem; */
+	/* width: 15rem; */
+	/* padding: 10px; */
+	/* background-color: rgb(218, 255, 194); */
+	/* border-radius: 10px; */
+	 transform: translate(-50%, -50%); 
+	cursor: move;
+	
+}
+
+.container header {
+	font-weight: 600;
+	text-transform: uppercase;
+	border-bottom: 1px solid black;
+}
+
+.draggable-container {
+	margin: 10px 0;
+}
+
+    </style>
+</head>
+
+<body>
+	<div class="container">
+		
+		<div class="draggable-container">
+            <center >
+                
+                <svg   height = "400" width = "400">
+                    <circle cx = "150" cy = "150" r = "100" stroke = "red" stroke-width = "2" fill="white"/>
+                </svg>
+            </center>
+		</div>
+	</div>
+	 <script >
+          // script.js File 
+        const container = document.querySelector(".container");
+        function onMouseDrag({ movementX, movementY }) {
+            let getContainerStyle = window.getComputedStyle(container);
+            console.log(`getContainerStyle vaule is ${getContainerStyle}`);
+            let leftValue = parseInt(getContainerStyle.left);
+            console.log(leftValue)
+            let topValue = parseInt(getContainerStyle.top);
+            console.log(topValue)
+            container.style.left = `${leftValue + movementX}px`;
+            container.style.top = `${topValue + movementY}px`;
+        }
+        container.addEventListener("mousedown", () => {
+            container.addEventListener("mousemove", onMouseDrag);
+        });
+        document.addEventListener("mouseup", () => {
+            container.removeEventListener("mousemove", onMouseDrag);
+        });
+
+
+
+    </script> 
+</body>
+</html>
